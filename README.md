@@ -10,7 +10,7 @@ sudo apt install -y wget unzip build-essential git bc swig libncurses-dev libpyt
 
 ### Download BSP
 ```shell
-git clone https://github.com/MiyooCFW/buildroot
+git clone --recurse-submodules https://github.com/MiyooCFW/buildroot
 ```
 
 ## Make the first build
