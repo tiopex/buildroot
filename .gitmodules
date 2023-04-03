@@ -1,0 +1,4 @@
+[submodule "board/miyoo/main"]
+	path = board/miyoo/main
+	url = https://github.com/MiyooCFW/sdcard.git
+	branch = uclibc
