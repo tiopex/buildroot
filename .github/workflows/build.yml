@@ -37,9 +37,10 @@ jobs:
       run: |
         cd ${{ inputs.submodule || '.' }}
         #apt update && apt install -y wget unzip build-essential git bc swig libncurses-dev libpython3-dev libssl-dev cpio rsync subversion
-        sudo apt update && sudo apt install -y imagemagick ghostscript fonts-freefont-otf libvips libfreetype6-dev gsfonts libmagickwand-dev
-        make miyoo_uclibc_defconfig
-        make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}"
+        #sudo apt update && sudo apt install -y gsfonts
+        convert board/miyoo/miyoo-boot.png -pointsize 12 -fill white -annotate +10+230 "v2.0.0-"`git rev-parse --short HEAD`  -alpha off +flip -strip -define bmp:subtype=RGB565 bmp2:miyoo-boot.bmp
+        #make miyoo_uclibc_defconfig
+        #make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}"
  
     - name: generate-graphs
       run: |
@@ -99,8 +100,9 @@ jobs:
         cd ${{ inputs.submodule || '.' }}
         #apt update && apt install -y wget unzip build-essential git bc swig libncurses-dev libpython3-dev libssl-dev cpio rsync subversion
         sudo apt update && sudo apt install -y imagemagick ghostscript fonts-freefont-otf libvips libfreetype6-dev gsfonts libmagickwand-dev
-        make miyoo_musl_defconfig
-        make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}"
+        convert board/miyoo/miyoo-boot.png -pointsize 12 -fill white -annotate +10+230 "v2.0.0-"`git rev-parse --short HEAD`  -alpha off +flip -strip -define bmp:subtype=RGB565 bmp2:miyoo-boot.bmp
+        #make miyoo_musl_defconfig
+        #make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}"
 
     - name: generate-graphs
       run: |
