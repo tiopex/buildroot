@@ -49,11 +49,13 @@ jobs:
         #apt update && apt install -y wget unzip build-essential git bc swig libncurses-dev libpython3-dev libssl-dev cpio rsync subversion
         sudo apt update && sudo apt install -y gsfonts
         make miyoo_uclibc_defconfig
+        touch build.log
+        echo "::group::Verbose logs"
+        tail -f build.log &
+        echo "::endgroup::"
         set -o pipefail
         if ! ( \
-        make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}" 2>&1 \
-        | tee build.log \
-        | grep ">>>" \
+        make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}" | grep ">>>" > build.log 2>&1 \
         ); then tail -n100 build.log && exit 1
         fi
  
@@ -137,7 +139,7 @@ jobs:
         if ! ( \
         make sdk CFW_HASH="${{ steps.cfwsha.outputs.cfwsha }}" 2>&1 \
         | tee build.log \
-        | grep ">>>" \
+        | awk '/>>>/' \
         ); then tail -n100 build.log && exit 1
         fi
  
