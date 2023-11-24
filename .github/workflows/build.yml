@@ -32,7 +32,9 @@ jobs:
     - name: retrieve ccache
       uses: actions/cache@v3
       with:
-        path: ~/.buildroot-ccache
+        path: | 
+          ~/.buildroot-ccache
+          dl/
         key: ${{ inputs.submodule }}-uclibc-ccache-${{ github.sha }}
         restore-keys: |
           ${{ inputs.submodule }}-uclibc-ccache-
