@@ -4,8 +4,8 @@
 #
 ################################################################################
 UMTPRD_VERSION = origin/master
-UMTPRD_SITE_METHOD
-UMTPRD_SITE = https://github.com/viveris/uMTP-Responder/archive
+UMTPRD_SITE_METHOD = git
+UMTPRD_SITE = https://github.com/viveris/uMTP-Responder.git
 UMTPRD_LICENSE = GPL-3.0+
 UMTPRD_LICENSE_FILES = LICENSE
 
