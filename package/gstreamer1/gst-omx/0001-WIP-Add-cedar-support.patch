@@ -1,0 +1,26 @@
+From b85fb19effaac62e19af7bd9fcdfcd3c0199e791 Mon Sep 17 00:00:00 2001
+From: tiopex <tiopxyz@gmail.com>
+Date: Mon, 9 Jun 2025 12:53:35 +0200
+Subject: [PATCH] WIP: Add cedar support
+
+---
+ omx/gstomxvideo.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/omx/gstomxvideo.c b/omx/gstomxvideo.c
+index e08ff4c..ac8975e 100644
+--- a/omx/gstomxvideo.c
++++ b/omx/gstomxvideo.c
+@@ -40,6 +40,9 @@ gst_omx_video_get_format_from_omx (OMX_COLOR_FORMATTYPE omx_colorformat)
+   GstVideoFormat format;
+ 
+   switch (omx_colorformat) {
++	case OMX_COLOR_FormatYVU420Planar:
++	  format = GST_VIDEO_FORMAT_YV12;
++	  break;
+     case OMX_COLOR_FormatL8:
+       format = GST_VIDEO_FORMAT_GRAY8;
+       break;
+-- 
+2.34.1
+

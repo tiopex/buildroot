@@ -26,7 +26,7 @@ endif
 
 GST_OMX_CONF_OPTS += -Dtarget=$(GST_OMX_VARIANT)
 
-GST_OMX_DEPENDENCIES = gstreamer1 gst1-plugins-base libopenmax
+GST_OMX_DEPENDENCIES = gstreamer1 gst1-plugins-base libcedarc
 
 # adjust library paths to where buildroot installs them
 define GST_OMX_FIXUP_CONFIG_PATHS
