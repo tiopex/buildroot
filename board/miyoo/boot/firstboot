@@ -756,8 +756,23 @@ if $CHANGE_FS_P5; then
 	elif test "${P5_FS_TYPE}" == "EXT4"; then
 		sed -i "s|\(::sysinit:/bin/mount /dev/mmcblk0p5\).*|\1 "${ROMS}" -o rw,noatime|" /etc/inittab
 	fi
-	mount -o remount,ro / /
-	cat /etc/inittab >> ${LOG}
+  mount -o remount,ro / /
+  cat /etc/inittab >> ${LOG}
+fi
+
+#Check if btrfs module needed
+if test "${P4_FS_TYPE}" != "BTRFS" && test "${P5_FS_TYPE}" != "BTRFS" ; then
+  mount -o remount,rw / /
+  sed -i 's|^::sysinit:/sbin/modprobe btrfs|#&|' /etc/inittab
+  mount -o remount,ro / /
+  cat /etc/inittab >> ${LOG}
+  modprobe -r btrfs 2>&1 | tee -a "${LOGS}"
+else
+  mount -o remount,rw / /
+  sed -i 's|^#::sysinit:/sbin/modprobe btrfs|::sysinit:/sbin/modprobe btrfs|' /etc/inittab
+  mount -o remount,ro / /
+  cat /etc/inittab >> ${LOG}
+  modprobe btrfs 2>&1 | tee -a "${LOGS}"
 fi
 
 # Expand_ROMS_Partition-prompt for the p5 (ROMS) partition if requested
